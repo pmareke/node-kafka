@@ -27,4 +27,4 @@ curl --request POST \
   "receiver": "consumer",
   "message": "KAFKA!"
 }'
-```bash
+```
