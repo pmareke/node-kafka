@@ -1,0 +1,39 @@
+# This file should be used CI (jenkins) dc file explicitly with "-f docker-compose.yml"
+# In a local enviornment you shouldn't explicitly declare it in order to use also the override file
+version: '2'
+services:
+  consumer:
+    build: ./packages/consumer
+    depends_on:
+      - kafka
+  producer:
+    build: ./packages/producer
+    ports:
+      - "3000:3000"
+    depends_on:
+      - kafka
+  kafka:
+    image: bitnami/kafka:2-debian-10
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: "kafka"
+      KAFKA_ADVERTISED_PORT: "9092"
+      KAFKA_PORT: "9092"
+      KAFKA_INTER_BROKER_LISTENER_PORT: "9092"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CONTROLLED_SHUTDOWN_ENABLE: "true"
+      KAFKA_CREATE_TOPICS: "blog:1:1"
+      KAFKA_RESERVED_BROKER_MAX_ID: 1
+      KAFKA_BROKER_ID: 1
+      ALLOW_PLAINTEXT_LISTENER: yes
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: true
+    ports:
+    - "9092:9092"
+    depends_on:
+      - "zookeeper"
+
+  zookeeper:
+    image: bitnami/zookeeper:3-debian-10
+    ports:
+    - "2181:2181"
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: yes
