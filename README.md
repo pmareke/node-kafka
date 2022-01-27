@@ -1,2 +1,3 @@
-# node-kafka
-Monorepo with 2 nodejs microservices and kafka
+# Node microservices usin Kafka
+
+![stack](./images/stack.png)
