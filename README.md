@@ -1,6 +1,5 @@
-# Node microservices usin Kafka
-
-![stack](./images/stack.png)
+# Monitorization: Express + Prometheus + Grafana
+![stack](./images/env.png)
 
 
 ## Install dependencies
@@ -16,15 +15,8 @@ docker-compose build
 docker-compose up
 ```
 
-## Send a message
+## [Visit metrics](http://localhost:8080/metrics)
 
-```bash
-curl --request POST \
-  --url http://localhost:3000/api/messages \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "sender": "producer",
-  "receiver": "consumer",
-  "message": "KAFKA!"
-}'
-```
+## [Visit Prometheus](http://localhost:9090)
+
+## [Visit Grafana](http://localhost:3000)
